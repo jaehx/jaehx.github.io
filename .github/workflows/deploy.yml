@@ -17,12 +17,17 @@ jobs:
       - name: Checkout your repository
         uses: actions/checkout@v4
 
+      # Node.js와 Yarn 환경을 명시적으로 설정
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'yarn' # Yarn 캐시를 자동으로 관리하여 에러 방지
+
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         with:
-          # Node.js v20 이상을 사용하도록 명시
           node-version: 20
-          # Yarn v1을 사용하도록 설정 (lock 파일을 통해 자동 감지되지만 명시하는 것이 안전함)
           package-manager: yarn
 
   deploy:
